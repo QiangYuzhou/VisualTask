@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--用ie打开时，转为edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--设置网页宽度为设备宽度，初始缩放倍数为1（bootStrap优先考虑移动端-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootStrap/bootstrap.css" />
+    <link rel="stylesheet" href="UserManage.css">
+    <script src="../bootStrap/jquery.js"></script>
+    <script src="../bootStrap/bootstrap.js"></script>
+
+</head>
+<body>
+
+<div class="container" >
+    <div class="row Middle" style="margin: 2%">
+        <span class="glyphicon glyphicon-th-list"> 修改个人信息</span>
+    </div>
+
+    <hr>
+
+    <div class="row" style="margin-top: 35px">
+        <form class="form-horizontal" >
+
+            <div class="form-group">
+                <label for="userName" class="col-sm-1  control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" id="userName" class="form-control inpuxBoxWidth"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passWord1" class="col-sm-1  control-label">密码</label>
+                <div class="col-sm-10 ">
+                    <input type="password" id="passWord1" class="form-control inpuxBoxWidth"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passWord2" class="col-sm-1  control-label">密码确认</label>
+                <div class="col-sm-10 ">
+                    <input type="password" id="passWord2" class="form-control inpuxBoxWidth"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="projectName" class="col-sm-1  control-label">项目名</label>
+                <div class="col-sm-10 ">
+                    <input type="text" id="projectName" class="form-control inpuxBoxWidth"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                    <input type="button" value="添加" class="btn btn-primary button_inline">
+                    <input type="button" value="返回" class="btn btn-primary button_inline" >
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+
+<!--jquary引入在bootstrap.js之前-->
+
+</body>
+</html>
