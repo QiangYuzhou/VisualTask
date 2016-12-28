@@ -1,0 +1,17 @@
+﻿module.exports=function(app){
+	app.get('/',function(req,res){
+		res.render('UserManage');
+	});
+	app.get('/Manage',function(req,res){
+		res.render('Manage');
+	});
+	app.get('/add',function(req,res){
+		res.render('add');
+	});
+	app.get('/edit',function(req,res){
+		res.render('edit');
+	});
+	app.get('/editUser',function(req,res){
+		res.render('editUser');
+	});
+};

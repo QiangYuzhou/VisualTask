@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" />
+    <link rel="stylesheet" href="stylesheets/UserManage.css">
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/bootstrap.js"></script>
+
+</head>
+<body>
+
+
+<div class="container-fluid" >
+
+    <div class="row Theme2">
+        <form class="navbar-form navbar-left" style="margin: 1%;">
+            <div class="input-group">
+                    <span class="input-group-addon Theme2">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                <input type="text" class="form-control" placeholder="查询搜索">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container" >
+    <div class="row Middle" style="margin: 2%">
+        <span class="glyphicon glyphicon-th-list"> 添加用户</span>
+    </div>
+
+    <hr>
+
+    <div class="row" style="margin-top: 35px">
+        <form class="form-horizontal" >
+
+            <div class="form-group" id="userNameDiv">
+                <label for="userName" class="col-sm-1  control-label">用户名</label>
+                <div class="col-sm-4">
+                    <input type="text" id="userName" class="form-control inpuxBoxWidth"/>
+                </div>
+                <label class="col-sm-2  control-label" id="userNameLabel"></label>
+            </div>
+
+            <div class="form-group" id="passWord1Div">
+                <label for="passWord1" class="col-sm-1  control-label">密码</label>
+                <div class="col-sm-4 ">
+                    <input type="password" id="passWord1" class="form-control inpuxBoxWidth"/>
+                </div>
+                <label class="col-sm-2  control-label" id="passWord1Label"></label>
+            </div>
+
+            <div class="form-group" id="passWord2Div">
+                <label for="passWord2" class="col-sm-1  control-label">密码确认</label>
+                <div class="col-sm-4 ">
+                    <input type="password" id="passWord2" class="form-control inpuxBoxWidth"/>
+                </div>
+                <label class="col-sm-2  control-label" id="passWord2Label"></label>
+            </div>
+
+            <div class="form-group" id="projectNameDiv">
+                <label for="projectName" class="col-sm-1  control-label">项目名</label>
+                <div class="col-sm-4 ">
+                    <input type="text" id="projectName" class="form-control inpuxBoxWidth"/>
+                </div>
+                <label class="col-sm-2  control-label" id="projectNameLabel"></label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                    <input type="button" value="添加" class="btn btn-primary button_inline" onclick="addUser()">
+                    <a href="/Manage">
+                        <input type="button" value="返回" class="btn btn-primary button_inline" >
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="javascripts/add.js"></script>
+
+</body>
+</html>
