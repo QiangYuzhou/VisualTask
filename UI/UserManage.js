@@ -18,10 +18,8 @@ function setFullHeight() {
     for(var i=0;i<fullScreenelement.length;i++) {
         fullScreenelement[i].setAttribute("style","height: " + window.innerHeight + "px");
     }
-    var iframeHeight = window.innerHeight - document.getElementById("Search_bar").clientHeight - 20;
 
-    // console.log(document.getElementById("Search_bar").getAttribute("style","height"));
-    document.getElementById("iframe_manage").setAttribute("style","height: " + iframeHeight + "px");
+    document.getElementById("iframe_manage").setAttribute("style","height: " + Number(window.innerHeight - 13) + "px");
 }
 
 

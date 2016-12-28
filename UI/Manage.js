@@ -14,13 +14,16 @@ window.onload = function () {
 
     addLineToUserTable();
     addButton();
+
 }
+
+var searchStr = "";
 
 var pageNumber;
 var lineNumber;
 var curruntPage = 1;
 var userList = [];
-var ButtonNumber = 9;
+var ButtonNumber = 11;
 
 function getUserList( ) {
     var i, user;
@@ -32,7 +35,8 @@ function getUserList( ) {
         user.password = "password";
         userList[i] = user;
     }
-
+    clearinputlist();
+    setInputList();
     lineNumber = userList.length;
 
     var blankLine = lineNumber % 10;
@@ -46,6 +50,25 @@ function getUserList( ) {
     if (blankLine != 0)
         pageNumber = (lineNumber + 10 - blankLine) / 10;
     else pageNumber = lineNumber / 10;
+}
+
+function searchButton() {
+    searchStr = document.getElementById("searchBar").value;
+    document.getElementById("searchBar").value = "";
+    clearTable();
+    addLineToUserTable();
+}
+
+function inputCall() {
+    var userTable = document.getElementById("userTable");
+    if (event.keyCode == 13)
+    {
+        searchStr = document.getElementById("searchBar").value;
+        window.event.returnValue = false;   //禁止刷新页面
+        document.getElementById("searchBar").value = "";
+        clearTable();
+        addLineToUserTable();
+    }
 }
 
 //更新用户显示列表
@@ -63,13 +86,6 @@ function addLineToUserTable() {
         var newCell3 = newRow.insertCell();
         newCell3.className = "text-center";
 
-        var input0 = document.createElement("input");
-        input0.type = "checkbox";
-        var span0 = document.createElement("span");
-        span0.innerHTML = i + 1;
-        span0.className = "glyphicon";
-        newCell0.appendChild(input0);
-        newCell0.appendChild(span0);
 
         newCell1.innerHTML = userList[i].name;
         newCell2.innerHTML = userList[i].objectName;
@@ -90,9 +106,40 @@ function addLineToUserTable() {
         newCell3.appendChild(a1);
         newCell3.appendChild(Button2);
 
+        var input0 = document.createElement("input");
+        input0.type = "checkbox";
+        if(searchStr != "") {
+            if (userList[i].name.indexOf(searchStr) != -1 || userList[i].objectName.indexOf(searchStr) != -1)
+                input0.checked = true;
+        }
+        else input0.checked = false;
 
+        var span0 = document.createElement("span");
+        span0.innerHTML = i + 1;
+        span0.className = "glyphicon";
+        newCell0.appendChild(input0);
+        newCell0.appendChild(span0);
     }
 
+}
+
+function setInputList() {
+    var inputlist = document.getElementById("inputlist");
+    var i;
+    var option1,option2;
+    for(i = 0; i < userList.length;i++) {
+        option1 = document.createElement("option");
+        option1.innerHTML = userList[i].name;
+        option2 = document.createElement("option");
+        option2.innerHTML = userList[i].objectName;
+        inputlist.appendChild(option2);
+        inputlist.appendChild(option1);
+    }
+}
+
+function clearinputlist() {
+    var inputlist = document.getElementById("inputlist");
+    inputlist.innerHTML = "";
 }
 
 function clearButton() {

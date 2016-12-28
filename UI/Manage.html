@@ -13,6 +13,23 @@
 </head>
 <body>
 
+<div class="container-fluid" >
+
+    <div class="row Theme2">
+        <form class="inputBar navbar-form navbar-left"  >
+            <div class="input-group">
+                    <span class="input-group-addon Theme2">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                <input type="text" class="form-control" id="searchBar" placeholder="查询搜索" list="inputlist" onkeydown=inputCall()>
+                 <datalist id = "inputlist">
+                 </datalist>
+            </div>
+        </form>
+        <button class="inputBar btn btn-success" onclick=searchButton()>搜索</button>
+    </div>
+</div>
+
 <div class="container" >
     <div class="row Middle" style="margin: 2%">
         <span class="glyphicon glyphicon-th-list"> 用户列表</span>
@@ -41,10 +58,6 @@
         </div>
     </div>
 
-
-    <!--<label>-->
-        <!--<input type="checkbox"> Remember me-->
-    <!--</label>-->
 
 
 </div>

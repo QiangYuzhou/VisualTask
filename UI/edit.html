@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--用ie打开时，转为edge-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--设置网页宽度为设备宽度，初始缩放倍数为1（bootStrap优先考虑移动端-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet" href="../bootStrap/bootstrap.css" />
@@ -14,6 +12,21 @@
 
 </head>
 <body>
+
+
+<div class="container-fluid" >
+
+    <div class="row Theme2">
+        <form class="navbar-form navbar-left" style="margin: 1%;">
+            <div class="input-group">
+                    <span class="input-group-addon Theme2">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                <input type="text" class="form-control" placeholder="查询搜索">
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="container" >
     <div class="row Middle" style="margin: 2%">
@@ -56,7 +69,9 @@
             <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-1">
                     <input type="button" value="添加" class="btn btn-primary button_inline">
-                    <input type="button" value="返回" class="btn btn-primary button_inline" >
+                    <a href="Manage.html">
+                        <input type="button" value="返回" class="btn btn-primary button_inline" >
+                    </a>
                 </div>
             </div>
         </form>
