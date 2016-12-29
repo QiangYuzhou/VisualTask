@@ -8,40 +8,44 @@
  *      删除行     : deleteLine(), 同步删除数据库元素
  */
 
-window.onload = function () {
-
-    getUserList();
-
-    addLineToUserTable();
-    addButton();
-
-}
-
-var searchStr = "";
+ var searchStr = "";
 var pageSize = 10;
 var pageNumber;
 var lineNumber;
 var curruntPage = 1;
 var userList = [];
 var ButtonNumber = 11;
+var data;
+ 
+window.onload = function () {
+	
+	getData();
+}
+
+function getData() {
+	 $.ajax({
+		type:"GET",
+		url:"/getData",
+		dataType:"json",
+		async:'false',
+		success:function(result){
+			userList = result;
+			getUserList();
+			addLineToUserTable();
+			addButton();
+		}
+	});
+}
 
 function getUserList( ) {
     var i, user;
-
-    for (i = 0; i < 200; i++) {
-        user = {};
-        user.name = "username" + i;
-        user.objectName = "objectName" + i;
-        user.password = "password";
-        userList[i] = user;
-    }
 
     lineNumber = userList.length;
 
     clearinputlist();
     setInputList();
 
-    var blankLine = lineNumber % pageSize;
+    var blankLine = pageSize - lineNumber % pageSize;//wrong
     for (i = 0; i < blankLine; i++) {
         user = {};
         user.name = " ";
@@ -49,9 +53,9 @@ function getUserList( ) {
         user.password = " ";
         userList[lineNumber + i] = user;
     }
-    if (blankLine != 0)
-        pageNumber = (lineNumber + pageSize - blankLine) / pageSize;
-    else pageNumber = lineNumber / pageSize;
+    if (blankLine != pageSize)
+        pageNumber = Math.floor((lineNumber + pageSize ) / pageSize);
+    else pageNumber = Math.ceil(lineNumber / pageSize);
 }
 
 function searchButton() {
@@ -368,15 +372,26 @@ function deleteLine() {
     var userNum = this.userNum;
     var i = this.userNum;
     var userName = userList[i].name;
-
+	$.ajax({
+		type:"GET",
+		url:"/delete/"+userName,
+		dataType:"json",
+		async:'false',
+		success:function(result){
+			if(result.status=="good"){
+				clearTable();
+				clearButton();
+				getData();
+				alert("删除成功");
+			}
+			else
+				alert("删除失败！");
+		}
+	});
     /**
      * 删除元素的操作
      */
 
-    clearTable();
-    getUserList();
-    addLineToUserTable();
-    clearButton();
-    addButton();
+   
 }
 

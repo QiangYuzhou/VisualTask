@@ -20,26 +20,38 @@ function editUser() {
     var password1 = document.getElementById("passWord1").value;
     var password2 = document.getElementById("passWord2").value;
     var projectname = document.getElementById("projectName").value;
+	var succeed = true;
     if(projectname == "") {
         document.getElementById("projectNameDiv").className = "form-group has-error";
         document.getElementById("projectNameLabel").innerHTML = "未填写项目名";
+		succeed = false;
     }
     else if(password1 == "") {
         document.getElementById("passWord1Div").className = "form-group has-error";
         document.getElementById("passWord1Label").innerHTML = "未输入密码";
+		succeed = false;
     }
     else if(password2 == "") {
         document.getElementById("passWord2Div").className = "form-group has-error";
         document.getElementById("passWord2Label").innerHTML = "未输入确认密码";
+		succeed =false;
     }
     else if(password1 != password2) {
         document.getElementById("passWord1Div").className = "form-group has-error";
         document.getElementById("passWord2Div").className = "form-group has-error";
         document.getElementById("passWord2Label").innerHTML = "两次输入密码不同";
+		succeed =false;
     }
-    else {
-        alert("用户" + userName + "修改成功！");
-        resetColor();
+	
+    if(succeed) {
+		$.ajax({
+			type:"POST",
+			url:"/updateSucceed",
+			data:{name:userName,password:password1,objectName:projectname},
+			success: alert("用户" + userName + "修改成功！"),
+			dataType:"json"
+		});
+		resetColor();
     }
 }
 

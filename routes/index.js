@@ -1,3 +1,4 @@
 module.exports=function(app){
-	require('./test')(app);
+	require('./render')(app);
+	require('./dataGet')(app);
 };
