@@ -11,6 +11,10 @@ $(document).ready(function(){
 
 window.onload = function () {
     setFullHeight();
+    var adminname = document.getElementById("adminName");
+    adminname.innerHTML = "Admin";
+    localStorage.setItem("TYPE","true");    //设置管理员类型
+    localStorage.setItem("SearchStr","");
  };
 
 function setFullHeight() {
@@ -20,6 +24,11 @@ function setFullHeight() {
     }
 
     document.getElementById("iframe_manage").setAttribute("style","height: " + Number(window.innerHeight - 13) + "px");
+}
+
+function setCurruntUserName() {
+    var adminname = document.getElementById("adminName").innerHTML;
+    localStorage.setItem("currunt_user_name",adminname);
 }
 
 

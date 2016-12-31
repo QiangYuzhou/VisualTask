@@ -17,14 +17,18 @@
 <div class="container-fluid" >
 
     <div class="row Theme2">
-        <form class="navbar-form navbar-left" style="margin: 1%;">
+        <form class="inputBar navbar-form navbar-left"  >
             <div class="input-group">
                     <span class="input-group-addon Theme2">
                         <span class="glyphicon glyphicon-search"></span>
                     </span>
-                <input type="text" class="form-control" placeholder="查询搜索">
+                <input type="text" class="form-control" id="searchBar" placeholder="查询搜索" list="inputlist" onkeydown=inputCall()>
+                <datalist id = "inputlist" >
+                </datalist>
             </div>
         </form>
+        <button class="inputBar btn btn-success" onclick="searchButton()">搜索</button>
+        <button class="inputBar btn btn-success" onclick="clearCheckBox()">清空</button>
     </div>
 </div>
 
@@ -38,37 +42,41 @@
     <div class="row" style="margin-top: 35px">
         <form class="form-horizontal" >
 
-            <div class="form-group">
+            <div class="form-group" id="userNameDiv">
                 <label for="userName" class="col-sm-1  control-label">用户名</label>
-                <div class="col-sm-10">
-                    <input type="text" id="userName" class="form-control inpuxBoxWidth" />
+                <div class="col-sm-4">
+                    <input type="text" id="userName" class="form-control inpuxBoxWidth" disabled/>
                 </div>
+                <label class="col-sm-2  control-label" id="userNameLabel"></label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="passWord1Div">
                 <label for="passWord1" class="col-sm-1  control-label">新密码</label>
-                <div class="col-sm-10 ">
+                <div class="col-sm-4 ">
                     <input type="password" id="passWord1" class="form-control inpuxBoxWidth"/>
                 </div>
+                <label class="col-sm-2  control-label" id="passWord1Label"></label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="passWord2Div">
                 <label for="passWord2" class="col-sm-1  control-label">密码确认</label>
-                <div class="col-sm-10 ">
+                <div class="col-sm-4 ">
                     <input type="password" id="passWord2" class="form-control inpuxBoxWidth"/>
                 </div>
+                <label class="col-sm-2  control-label" id="passWord2Label"></label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="projectNameDiv">
                 <label for="projectName" class="col-sm-1  control-label">项目名</label>
-                <div class="col-sm-10 ">
-                    <input type="text" id="projectName" class="form-control inpuxBoxWidth"/>
+                <div class="col-sm-4 ">
+                    <input type="text" id="projectName" class="form-control inpuxBoxWidth" disabled/>
                 </div>
+                <label class="col-sm-2  control-label" id="projectNameLabel"></label>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-1">
-                    <input type="button" value="添加" class="btn btn-primary button_inline">
+                    <input type="button" value="添加" class="btn btn-primary button_inline" onclick="editUser()">
                     <a href="/Manage">
                         <input type="button" value="返回" class="btn btn-primary button_inline" >
                     </a>

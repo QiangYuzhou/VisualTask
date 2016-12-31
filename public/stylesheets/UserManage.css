@@ -3,6 +3,10 @@
 
 }
 
+body{
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+}
+
 .full_Screen_Height{
 }
 
@@ -51,6 +55,13 @@
 .inputBar {
     margin-top: 1%;
     margin-bottom: 1%;
+}
+.bar-style {
+    border-left: 5px solid #1589c9;
+}
+
+.character_color1 {
+    color: white;
 }
 
 

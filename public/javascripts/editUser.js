@@ -10,8 +10,80 @@ window.onload = function () {
     document.getElementById("userName").value = userName;
     document.getElementById("projectName").value = objectName;
 
+    getData();
 
 }
+
+var searchStr;
+var userList = [];
+
+function getData() {
+    $.ajax({
+        type:"GET",
+        url:"/getData",
+        dataType:"json",
+        async:'false',
+        success:function(result){
+            userList = result;
+            clearinputlist();
+            setInputList();
+        }
+    });
+}
+
+function inputCall() {
+    searchStr = document.getElementById("searchBar").value;
+    if (event.keyCode == 13)
+    {
+        window.event.returnValue = false;   //禁止刷新页面
+        if(searchStr != "") {
+            localStorage.setItem("SearchStr", searchStr);
+            window.location.href = "/Manage";
+        }
+    }
+    else {
+
+    }
+}
+
+function setInputList() {
+    var inputlist = document.getElementById("inputlist");
+    inputlist.async = true;
+    var i;
+    var option1,option2;
+    for(i = 0; i < userList.length;i++) {
+
+        option1 = document.createElement("option");
+        option1.innerHTML = userList[i].name;
+        inputlist.appendChild(option1);
+
+
+        option2 = document.createElement("option");
+        option2.innerHTML = userList[i].objectName;
+        inputlist.appendChild(option2);
+
+    }
+}
+
+function clearinputlist() {
+    var inputlist = document.getElementById("inputlist");
+    inputlist.innerHTML = "";
+}
+
+function searchButton() {
+    searchStr = document.getElementById("searchBar").value;
+    if(searchStr != "") {
+        localStorage.setItem("SearchStr", searchStr);
+        window.location.href = "/Manage";
+    }
+}
+
+function clearCheckBox() {
+    document.getElementById("searchBar").value = "";
+}
+
+
+
 var userName;
 var objectName;
 
@@ -44,13 +116,21 @@ function editUser() {
     }
 	
     if(succeed) {
+        var x = false;
 		$.ajax({
 			type:"POST",
 			url:"/updateSucceed",
 			data:{name:userName,password:password1,objectName:projectname},
-			success: alert("用户" + userName + "修改成功！"),
+			success: x = true,
 			dataType:"json"
 		});
+		if(x) {
+            document.getElementById("tip_text").innerHTML = "修改成功";
+        }
+        else {
+            document.getElementById("tip_text").innerHTML = "修改失败";
+        }
+        $('#myModal').modal('show');
 		resetColor();
     }
 }

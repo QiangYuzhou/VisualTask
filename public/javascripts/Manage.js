@@ -16,10 +16,17 @@ var curruntPage = 1;
 var userList = [];
 var ButtonNumber = 11;
 var data;
- 
+var usertype;
 window.onload = function () {
+
+    var str = localStorage.getItem("SearchStr");
+    localStorage.setItem("SearchStr","");
+    if(str != "" && str != null && str != undefined) {
+        searchStr = str;
+    }
 	
 	getData();
+	usertype = (localStorage.getItem("TYPE") == "true");
 }
 
 function getData() {
@@ -31,14 +38,15 @@ function getData() {
 		success:function(result){
 			userList = result;
 			getUserList();
+            addButton();
+			if(searchStr != "" && searchStr != null )
+			    findSearchStr();
 			addLineToUserTable();
-			addButton();
 		}
 	});
 }
 
 function getUserList( ) {
-    var i, user;
 
     lineNumber = userList.length;
 
@@ -46,13 +54,7 @@ function getUserList( ) {
     setInputList();
 
     var blankLine = pageSize - lineNumber % pageSize;//wrong
-    for (i = 0; i < blankLine; i++) {
-        user = {};
-        user.name = " ";
-        user.objectName = " ";
-        user.password = " ";
-        userList[lineNumber + i] = user;
-    }
+
     if (blankLine != pageSize)
         pageNumber = Math.floor((lineNumber + pageSize ) / pageSize);
     else pageNumber = Math.ceil(lineNumber / pageSize);
@@ -68,6 +70,7 @@ function searchButton() {
 
 function clearCheckBox() {
     searchStr = "";
+    document.getElementById("searchBar").value = "";
     clearTable();
     addLineToUserTable();
 }
@@ -107,7 +110,8 @@ function findSearchStr() {
             addButton();
         }
         else if(page == 0) {
-            alert("未检索到相应内容");
+            document.getElementById("tip_text").innerHTML = "未检索到相应内容";
+            $('#myModal').modal('show');
         }
 
     }
@@ -117,7 +121,13 @@ function findSearchStr() {
 function addLineToUserTable() {
     var i;
     var userTable = document.getElementById("userTable");
-    for (i = curruntPage * pageSize - pageSize; i < curruntPage * pageSize; i++) {
+    var begin;
+    var end;
+    begin = curruntPage * pageSize - pageSize;
+    end = curruntPage * pageSize;
+    if(end > lineNumber)
+        end = lineNumber;
+    for (i = begin; i < end; i++) {
         var newRow = userTable.insertRow();
         var newCell0 = newRow.insertCell();
         newCell0.className = "text-center";
@@ -128,27 +138,45 @@ function addLineToUserTable() {
         var newCell3 = newRow.insertCell();
         newCell3.className = "text-center";
 
+        newCell0.width = "15%";
+        newCell1.width = "30%";
+        newCell2.width = "30%";
+        newCell3.width = "25%";
 
         newCell1.innerHTML = userList[i].name;
         newCell2.innerHTML = userList[i].objectName;
 
         var a1 = document.createElement("a");
-        a1.href = "/editUser";
+
         var Button1 = document.createElement("button");
         Button1.className = "btn btn-primary ButtonMargin";
         Button1.innerHTML = "修改";
         Button1.username = userList[i].name;
         Button1.objectName = userList[i].objectName;
-        Button1.onclick = editline;
+
+        if(!usertype)
+            Button1.disabled = true;
+        else {
+            Button1.onclick = editline;
+            a1.href = "/editUser";
+        }
         a1.appendChild(Button1);
 
         var Button2 = document.createElement("button");
         Button2.className = "btn btn-primary ButtonMargin";
         Button2.innerHTML = "删除";
-        Button2.onclick = deleteLine;
         Button2.username = userList[i].name;
         Button2.objectName = userList[i].objectName;
         Button2.userNum = i;
+        // data-toggle="modal" data-target="#myModal"
+        Button2.setAttribute("data-toggle","modal");
+        Button2.setAttribute("data-target","#myModal");
+        if(!usertype)
+            Button2.disabled = true;
+        else {
+            Button2.onclick = deleteLine;
+        }
+
 
         newCell3.appendChild(a1);
         newCell3.appendChild(Button2);
@@ -382,15 +410,12 @@ function deleteLine() {
 				clearTable();
 				clearButton();
 				getData();
-				alert("删除成功");
+				document.getElementById("tip_text").innerHTML = "删除成功";
 			}
 			else
-				alert("删除失败！");
+                document.getElementById("tip_text").innerHTML = "删除失败";
 		}
 	});
-    /**
-     * 删除元素的操作
-     */
 
    
 }

@@ -2,6 +2,83 @@
  * Created by 泰佑 on 2016/12/24.
  */
 
+window.onload = function () {
+    getData();
+}
+
+var searchStr;
+var userList = [];
+
+function getData() {
+    $.ajax({
+        type:"GET",
+        url:"/getData",
+        dataType:"json",
+        async:'false',
+        success:function(result){
+            userList = result;
+            clearinputlist();
+            setInputList();
+        }
+    });
+}
+
+function inputCall() {
+    searchStr = document.getElementById("searchBar").value;
+    if (event.keyCode == 13)
+    {
+        window.event.returnValue = false;   //禁止刷新页面
+        if(searchStr != "") {
+            localStorage.setItem("SearchStr", searchStr);
+            window.location.href = "/Manage";
+        }
+    }
+    else {
+
+    }
+}
+
+function setInputList() {
+    var inputlist = document.getElementById("inputlist");
+    inputlist.async = true;
+    var i;
+    var option1,option2;
+    for(i = 0; i < userList.length;i++) {
+
+        option1 = document.createElement("option");
+        option1.innerHTML = userList[i].name;
+        inputlist.appendChild(option1);
+
+
+        option2 = document.createElement("option");
+        option2.innerHTML = userList[i].objectName;
+        inputlist.appendChild(option2);
+
+
+    }
+}
+
+function clearinputlist() {
+    var inputlist = document.getElementById("inputlist");
+    inputlist.innerHTML = "";
+}
+
+function searchButton() {
+    searchStr = document.getElementById("searchBar").value;
+    if(searchStr != "") {
+        localStorage.setItem("SearchStr", searchStr);
+        window.location.href = "/Manage";
+    }
+}
+
+function clearCheckBox() {
+    document.getElementById("searchBar").value = "";
+}
+
+
+
+
+
 function addUser() {
     resetColor();
     var password1 = document.getElementById("passWord1").value;
@@ -47,11 +124,13 @@ function addUser() {
 						type:"POST",
 						url:"/addSucceed",
 						data:{name:username,password:password1,objectName:projectname},
-						success: alert("用户" + username + "添加成功！"),
 						dataType:"json"
 					});
 					clear();
 					resetColor();
+                    document.getElementById("tip_text").innerHTML = "添加成功";
+                    $('#myModal').modal('show');
+                    // data-toggle="modal"
 				}
 				else{
 					document.getElementById("userNameDiv").className = "form-group has-error";

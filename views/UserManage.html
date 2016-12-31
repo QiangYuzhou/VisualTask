@@ -24,25 +24,21 @@
                         <img src="images/UserExample.jpg" alt="管理员头像" class="img-responsive img-circle">
                     </div>
                 </div>
-                <ul class="nav" >
-                    <li><a href="#" class="Middle" >
-                        管理员名字
-                        <span class="caret"></span>
-                    </a></li>
-                </ul>
+                <p href="#" class="Middle character_color1" id="adminName" style="margin-top: 2%"></p>
+
             </div>
 
             <div class="row Bottom_border">
-                <ul class="nav " >
-                    <li><a href="/Manage" target="iframe_manage" class="Larger" >用户管理</a></li>
-                    <li><a href="/add" class="Middle" target="iframe_manage">添加用户</a></li>
-                    <li><a href="/edit" target="iframe_manage" class="Middle" >修改信息</a></li>
+                <ul class="nav" >
+                    <li style="background-color: #30394a"><a href="/Manage" target="iframe_manage" class="character_color1 Larger bar-style" >用户管理</a></li>
+                    <li><a href="/add" class="character_color1 Middle" target="iframe_manage">添加用户</a></li>
+                    <li><a href="/edit" target="iframe_manage" class="character_color1 Middle" onclick="setCurruntUserName()">修改密码</a></li>
                 </ul>
             </div>
 
             <div class="row Bottom_border">
                 <ul class="nav" >
-                    <li><a href="#" class="Middle" >返回首页</a></li>
+                    <li><a href="#" class="character_color1 Middle" >返回首页</a></li>
                 </ul>
             </div>
         </div>
@@ -55,6 +51,7 @@
 
     </div>
 </div>
+
 
 <script src="javascripts/UserManage.js"></script>
 </body>
